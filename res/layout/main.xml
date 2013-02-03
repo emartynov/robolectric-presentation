@@ -7,11 +7,11 @@
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText" android:inputType="textUri" android:hint="@string/hint_download"/>
+            android:id="@+id/editUrl" android:inputType="textUri" android:hint="@string/hint_download"/>
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/download"
-            android:id="@+id/button"/>
+            android:id="@+id/downloadButton"/>
 </LinearLayout>
 

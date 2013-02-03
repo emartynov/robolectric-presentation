@@ -1,3 +1,0 @@
-<item android:id="@+id/download"
-              android:icon="@android:drawable/btn_plus"
-              android:title="@string/download" />
