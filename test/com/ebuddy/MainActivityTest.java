@@ -3,6 +3,8 @@ package com.ebuddy;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+
 public class MainActivityTest
 {
     private MainActivity activity;
@@ -17,5 +19,7 @@ public class MainActivityTest
     @Test
     public void checkInitialTexts () throws Exception
     {
+        assertThat( activity.downloadButton.getText() ).isEqualTo( "Download" );
     }
 }
+
