@@ -30,6 +30,11 @@
             <scope>provided</scope>
             <version>${android.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.roboguice</groupId>
+            <artifactId>roboguice</artifactId>
+            <version>2.0</version>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
