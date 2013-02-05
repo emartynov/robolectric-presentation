@@ -19,7 +19,8 @@ public class MainActivityTest
     @Test
     public void checkInitialTexts () throws Exception
     {
-        assertThat( activity.downloadButton.getText() ).isEqualTo( "Download" );
+        assertThat( activity.downloadButton.getText() ).isEqualTo(
+                                           activity.getResources().getString( R.string.download ) );
     }
 }
 

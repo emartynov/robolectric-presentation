@@ -1,5 +1,6 @@
 package com.ebuddy;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -7,9 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import roboguice.activity.RoboActivity;
 
-public class MainActivity extends RoboActivity implements View.OnClickListener
+public class MainActivity extends Activity implements View.OnClickListener
 {
 
     EditText editUrl;
@@ -45,8 +45,14 @@ public class MainActivity extends RoboActivity implements View.OnClickListener
     }
 
     @Override
-    public boolean onMenuItemSelected ( int featureId, MenuItem item )
+    public boolean onPrepareOptionsMenu ( Menu menu )
     {
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected ( MenuItem item )
+    {
+        return super.onOptionsItemSelected( item );
     }
 }
