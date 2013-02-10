@@ -9,14 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.squareup.otto.Bus;
 import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 import javax.inject.Inject;
 
 
+@ContentView( R.layout.main )
 public class MainActivity extends RoboActivity implements View.OnClickListener
 {
 
+    @InjectView(R.id.editUrl)
     EditText editUrl;
+
+    @InjectView(R.id.downloadButton)
     Button downloadButton;
 
     @Inject
@@ -28,13 +34,7 @@ public class MainActivity extends RoboActivity implements View.OnClickListener
     @Override
     public void onCreate ( Bundle savedInstanceState )
     {
-
-
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.main );
-
-        editUrl = (EditText) findViewById( R.id.editUrl );
-        downloadButton = (Button) findViewById( R.id.downloadButton );
 
         downloadButton.setOnClickListener( this );
 
@@ -88,5 +88,12 @@ public class MainActivity extends RoboActivity implements View.OnClickListener
         //cancel download
         downloadButton.setEnabled( true );
         editUrl.setEnabled( true );
+    }
+
+    @Override
+    protected void onDestroy ()
+    {
+        bus.unregister( this );
+        super.onDestroy();
     }
 }

@@ -62,6 +62,14 @@ public class MainActivityTest extends InjectedTest
         verify( bus ).register( activity );
     }
 
+    @Test
+    public void whenDestroyThenUnregister ()
+    {
+        activity.onDestroy();
+
+        verify( bus ).unregister( activity );
+    }
+
 
     @Override
     public AbstractModule getTestModule ()
