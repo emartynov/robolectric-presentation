@@ -12,7 +12,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@RunWith ( InjectingTestRunner.class)
+@RunWith ( InjectingTestRunner.class )
 public class MainActivityTest extends InjectedTest
 {
     private MainActivity activity;
@@ -29,7 +29,7 @@ public class MainActivityTest extends InjectedTest
     public void checkInitialTexts () throws Exception
     {
         assertThat( activity.downloadButton.getText() ).isEqualTo(
-                                           activity.getResources().getString( R.string.download ) );
+                                                                         activity.getResources().getString( R.string.download ) );
     }
 
     @Test
@@ -46,7 +46,7 @@ public class MainActivityTest extends InjectedTest
     {
         activity.downloadButton.performClick();
 
-        Menu menu = new TestMenu(  );
+        Menu menu = new TestMenu();
         activity.onCreateOptionsMenu( menu );
         activity.onPrepareOptionsMenu( menu );
 
@@ -59,7 +59,7 @@ public class MainActivityTest extends InjectedTest
     @Test
     public void registerToBusWhenCreated ()
     {
-        verify( bus ).register(activity);
+        verify( bus ).register( activity );
     }
 
 
@@ -73,7 +73,7 @@ public class MainActivityTest extends InjectedTest
             {
                 bind( Bus.class ).toInstance( bus );
             }
-        };  //To change body of implemented methods use File | Settings | File Templates.
+        };
     }
 }
 

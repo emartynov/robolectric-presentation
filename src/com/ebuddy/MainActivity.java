@@ -12,6 +12,7 @@ import roboguice.activity.RoboActivity;
 
 import javax.inject.Inject;
 
+
 public class MainActivity extends RoboActivity implements View.OnClickListener
 {
 
@@ -71,12 +72,15 @@ public class MainActivity extends RoboActivity implements View.OnClickListener
     @Override
     public boolean onOptionsItemSelected ( MenuItem item )
     {
-        if (item.getItemId() == R.id.cancel)
+        if ( item.getItemId() == R.id.cancel )
         {
             stopDownload();
-
+            return true;
         }
-        return super.onOptionsItemSelected( item );
+        else
+        {
+            return super.onOptionsItemSelected( item );
+        }
     }
 
     private void stopDownload ()
