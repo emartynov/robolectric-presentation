@@ -1,5 +1,6 @@
 package com.ebuddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -7,7 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import com.ebuddy.events.DownloadedData;
 import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -18,6 +21,8 @@ import javax.inject.Inject;
 @ContentView( R.layout.main )
 public class MainActivity extends RoboActivity implements View.OnClickListener
 {
+    static final String MIMETYPE = "mimetype";
+    static final String DATA = "data";
 
     @InjectView(R.id.editUrl)
     EditText editUrl;
@@ -95,5 +100,16 @@ public class MainActivity extends RoboActivity implements View.OnClickListener
     {
         bus.unregister( this );
         super.onDestroy();
+    }
+
+    @Subscribe
+    public void dataDownloaded ( DownloadedData data )
+    {
+        stopDownload();
+
+        Intent childActivity = new Intent( this, DisplayDownloadedDataActivity.class );
+        childActivity.putExtra( MIMETYPE, data.getMimeType() );
+        childActivity.putExtra( DATA, data.getData() );
+        startActivity( childActivity );
     }
 }

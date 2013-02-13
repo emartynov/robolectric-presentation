@@ -1,18 +1,23 @@
 package com.ebuddy;
 
 import android.view.Menu;
+import com.ebuddy.events.DownloadedData;
 import com.google.inject.AbstractModule;
 import com.squareup.otto.Bus;
+import com.xtremelabs.robolectric.Robolectric;
+import com.xtremelabs.robolectric.shadows.ShadowActivity;
+import com.xtremelabs.robolectric.shadows.ShadowIntent;
 import com.xtremelabs.robolectric.tester.android.view.TestMenu;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@RunWith ( InjectingTestRunner.class )
+@RunWith (InjectingTestRunner.class)
 public class MainActivityTest extends InjectedTest
 {
     private MainActivity activity;
@@ -68,6 +73,22 @@ public class MainActivityTest extends InjectedTest
         activity.onDestroy();
 
         verify( bus ).unregister( activity );
+    }
+
+    @Test
+    public void whenDownloadFinishedDetailsActivityIsShownWithCorrectParameters ()
+    {
+        activity.dataDownloaded( new DownloadedData( "html", new byte[] {} ) );
+
+        ShadowActivity shadowActivity = Robolectric.shadowOf( activity );
+        ShadowIntent shadowIntent = Robolectric.shadowOf( shadowActivity.getNextStartedActivity() );
+
+        //fest assert is going to have assertThat().isEqualsTo() fro classes in the next release
+        assertEquals( DisplayDownloadedDataActivity.class, shadowIntent.getIntentClass() );
+        assertThat( shadowIntent.getCharSequenceExtra( MainActivity.MIMETYPE ) )
+                .isEqualTo( "html" );
+        assertThat( shadowIntent.getByteArrayExtra( MainActivity.DATA ) )
+                .isEqualTo( new byte[] {} );
     }
 
 
